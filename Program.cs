@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 public class Book
 {
     public string Title { get; set; }
@@ -15,25 +15,24 @@ public class Book
     {
         return $"{Title} by {Author}";
     }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is Book otherList)
+        {
+            return this.Title == otherList.Title && this.Author == otherList.Author;
+        }
+        return false;
+    }
 }
 
 public class ReadingList
 {
     private List<Book> books { get; set; } = new List<Book>();
-
+    public int Count { get; set; } = 0;
     public ReadingList()
     {
         books = new List<Book>();
-    }
-
-    public List<Book> Books
-    {
-        get { return books; }
-    }
-
-    public int Count
-    {
-        get { return books.Count; }
     }
 
     public void AddBook(Book book)
@@ -89,15 +88,6 @@ public class ReadingList
         return list1.Count != list2.Count;
     }
 
-    public override bool Equals(object obj)
-    {
-        if (obj is ReadingList otherList)
-        {
-            return this.Count == otherList.Count;
-        }
-        return false;
-    }
-
     public Book this[int index]
     {
         get
@@ -149,8 +139,10 @@ class Program
         Console.WriteLine();
         readingList.PrintBooks();
 
+        Console.WriteLine();    
         try
         {
+            Console.WriteLine("Book at index 0: " + readingList[0].ToString());
             Console.WriteLine("Book at index 1: " + readingList[1].ToString());
         }
         catch (Exception ex)
@@ -177,11 +169,11 @@ Book 'To Kill a Mockingbird' removed from the reading list.
 Books in your reading list:
 George title by George Orwell
 The Great Gatsby by F. Scott Fitzgerald
+
+Book at index 0: George title by George Orwell
 Book at index 1: The Great Gatsby by F. Scott Fitzgerald
 
-C:\Users\David\source\repos\ConsoleApp1\ConsoleApp1\bin\Debug\net8.0\ConsoleApp1.exe (процесс 17640) завершил работу с кодом 0 (0x0).
+C:\Users\David\source\repos\ConsoleApp1\ConsoleApp1\bin\Debug\net8.0\ConsoleApp1.exe (процесс 16988) завершил работу с кодом 0 (0x0).
 Нажмите любую клавишу, чтобы закрыть это окно:
-
- 
  
  */
